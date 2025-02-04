@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PINGU TO DUCKY</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+            overflow: hidden;
+            position: relative;
+        }
+        .container {
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            background: rgba(255, 255, 255, 0.3);
+            padding: 30px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        h1 {
+            font-size: 4rem;
+            color: #fff;
+            margin-bottom: 30px;
+            font-family: 'Playfair Display', cursive;
+            font-weight: 400;
+        }
+        .button {
+            padding: 15px 30px;
+            font-size: 1.5rem;
+            margin: 15px;
+            cursor: pointer;
+            border: none;
+            border-radius: 12px;
+            color: white;
+            transition: background-color 0.3s, transform 0.3s;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 300;
+        }
+        #yesButton {
+            background-color: #ff6f61;
+        }
+        #yesButton:hover {
+            background-color: #ff4a3d;
+            transform: scale(1.1);
+        }
+        #noButton {
+            background-color: #ff9a9e;
+            position: absolute;
+        }
+        #noButton:hover {
+            background-color: #ff7b7f;
+        }
+        .firework {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: #ffd700;
+            border-radius: 50%;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 1);
+            animation: explode 1.2s ease-out;
+            opacity: 0;
+        }
+        @keyframes explode {
+            0% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(15); opacity: 0; }
+        }
+        #message {
+            display: none;
+            font-size: 1.8rem;
+            color: white;
+            margin-top: 30px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 400;
+            background: rgba(255, 105, 180, 0.8);
+            padding: 20px;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Wittlest bub, will you forgive me? 😢💖</h1>
+        <button class="button" id="yesButton" onclick="forgive()">Yes</button>
+        <button class="button" id="noButton" onmouseover="moveNoButton()">No</button>
+        <div id="message">Yay shenkyu baby bub! I love you so muchie! ❤️</div>
+    </div>
+
+    <script>
+        function forgive() {
+            document.getElementById("message").style.display = "block";
+            for (let i = 0; i < 50; i++) {
+                createFirework();
+            }
+        }
+
+        function moveNoButton() {
+            const noButton = document.getElementById('noButton');
+            const container = document.querySelector('.container');
+            const rect = container.getBoundingClientRect();
+            
+            const minX = rect.left + 20;
+            const maxX = rect.right - noButton.offsetWidth - 20;
+            const minY = rect.top + 20;
+            const maxY = rect.bottom - noButton.offsetHeight - 20;
+
+            const x = Math.random() * (maxX - minX) + minX;
+            const y = Math.random() * (maxY - minY) + minY;
+            
+            noButton.style.left = `${x}px`;
+            noButton.style.top = `${y}px`;
+        }
+
+        function createFirework() {
+            const firework = document.createElement('div');
+            firework.classList.add('firework');
+            firework.style.left = `${Math.random() * window.innerWidth}px`;
+            firework.style.top = `${Math.random() * window.innerHeight}px`;
+            document.body.appendChild(firework);
+            setTimeout(() => firework.remove(), 1200);
+        }
+    </script>
+</body>
+</html>
